@@ -13,6 +13,13 @@ const stdFields = [
   { where: "Header", field: "MsgType"}
 ];
 
+const perMsgFields = {
+  'D': [
+  { where: "Body", field: "Side" },
+  { where: "Body", field: "Quantity"}  
+  ]
+};
+
 var getFieldValuesArray = function gfva ( fm ) {
   let fvArray = [];
   stdFields.forEach( function(wf) {
