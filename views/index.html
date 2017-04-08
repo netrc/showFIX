@@ -1,0 +1,121 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShowFix</title>
+    <meta name="description" content="ShowFix - FIX Protocol Display - A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+
+  <div class="container" x="global container">
+      
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ShowFIX</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!-- nav container-->
+    </nav>
+
+    <br>
+  <div id="ShowFixApp">
+        <h1>Load FIX logs</h1>
+      <div class="row">
+        <div class="col-md-12">
+        <textarea width="100%" height="200"> </textarea>
+        </div>
+      </div>
+    
+    <div class="row">
+    <div class="col-md-7">
+      
+    <table class="table bordless">
+    <thead>
+        <tr>
+            <th>time</th>
+            <th>Sender/Sub</th>
+            <th>Target/Sub</th>
+            <th>MsgType</th>
+            <th>ClientOrderID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr v-for="f in fixMlist" v-on:click="showDetail(f)">            
+            <td scope="row"> {{ f.time }} </td>
+            <td> {{ f.senderSub }} </td>
+            <td> {{ f.targetSub }} </td>
+            <td> {{ f.msgType }} </td>
+            <td> {{ f.clientOrderID }}  </td>
+        </tr>
+    </tbody>
+    </table>
+      </div><!-- col7 - just the table part of the row -->
+      
+      <div class="col-md-5">
+        <h4> Message Detail </h4>
+        <table>
+          <tr v-for="x in fieldList">
+            <td> {{x.field}} </td>
+            <td> {{x.value }} </td>
+          </tr>
+          
+        </table>
+      </div><!-- col5 - the message detail table-->
+    </div><!-- table row -->
+
+    </div><!-- showfixapp -->
+  
+
+    <footer>
+      <a href="https://glitch.com">
+        Remix this in Glitch
+      </a>
+    </footer>
+
+    </div><!-- overall bootstrap container>
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="/spec/fix40.js"></script>
+    <script src="/spec/fix41.js"></script>
+    <script src="/spec/fix42.js"></script>
+    <script src="/spec/fix43.js"></script>
+    <script src="/spec/fix44.js"></script>
+    <script src="/spec/fixt11.js"></script>
+    <script src="/fixparserjs.js"></script>
+    <script src="/client.js"></script>
+
+  </body>
+</html>
