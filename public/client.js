@@ -33,7 +33,8 @@ $(function() {
   
   var app = new Vue({
   el: '#ShowFixApp',
-  data: { 
+  data: {
+    detailType: "", 
     fma: [],
 
     fieldList: []
