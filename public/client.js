@@ -33,8 +33,10 @@ $(function() {
   
   var app = new Vue({
   el: '#ShowFixApp',
+  rawString: "",
   data: {
     detailType: "", 
+    rawString: "",
     fma: [],
 
     fieldList: []
@@ -46,6 +48,7 @@ $(function() {
     },
     showDetail: function( fm ) {
       this.fieldList = getFieldValuesArray( fm );
+      this.rawString = fm.raw;
     }
   }
 })

@@ -55,6 +55,11 @@
       </div>
     
     <div class="row">
+    <div class="col-md-12">
+		<span > {{rawString}} </span>
+		</div>
+		</div>
+    <div class="row">
     <div class="col-md-7">
       
     <table class="table bordless">
@@ -81,15 +86,10 @@
       
       <div class="col-md-5">
         <h4> Message Detail </h4>
-
-				<input type="radio" id="raw" value="raw" v-model="detailType">
-				<label for="raw">Raw</label>
-				<input type="radio" id="par" value="par" v-model="detailType">
-				<label for="par">Parsed</label>
-				<input type="radio" id="ent" value="ent" v-model="detailType">
-				<label for="ent">Enhanced</label>
-				<br>
-				<span>DT: {{ detailType }}</span>
+<div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default">Parsed</button>
+  <button type="button" class="btn btn-default">Enhanced</button>
+</div>
 
         <table>
           <tr v-for="x in fieldList">
