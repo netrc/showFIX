@@ -55,11 +55,6 @@
       </div>
     
     <div class="row">
-    <div class="col-md-12">
-		<span > {{rawString}} </span>
-		</div>
-		</div>
-    <div class="row">
     <div class="col-md-7">
       
     <table class="table bordless">
@@ -85,20 +80,32 @@
       </div><!-- col7 - just the table part of the row -->
       
       <div class="col-md-5">
-        <h4> Message Detail </h4>
-<div class="btn-group" role="group" aria-label="...">
-  <button type="button" class="btn btn-default">Parsed</button>
-  <button type="button" class="btn btn-default">Enhanced</button>
-</div>
+        <b> Details </b> &nbsp;
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="btn btn-default" v-on:click="detType('raw')">Raw</button>
+					<button type="button" class="btn btn-default" v-on:click="detType('par')">Parsed</button>
+					<button type="button" class="btn btn-default" v-on:click="detType('ent')">Enhanced</button>
+				</div>
+				<br>
+					<div>
+							<template v-if="detailType === 'raw'">
+								<span> {{rawString}} </span>
+							</template>
+							<template v-if="detailType === 'par'">
+								<table>
+									<tr v-for="x in fieldList">
+										<td> {{x.field}} </td>
+										<td> {{x.value }} </td>
+									</tr>
+								</table>
+							</template>
+							<template v-if="detailType === 'ent'">
+								<h2> ent </h4>
+							</template>
+				</div>
 
-        <table>
-          <tr v-for="x in fieldList">
-            <td> {{x.field}} </td>
-            <td> {{x.value }} </td>
-          </tr>
-          
-        </table>
       </div><!-- col5 - the message detail table-->
+
     </div><!-- table row -->
 
     </div><!-- showfixapp -->

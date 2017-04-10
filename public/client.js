@@ -25,6 +25,11 @@ var getFieldValuesArray = function gfva ( fm ) {
   stdFields.forEach( function(wf) {
     fvArray.push( {field: wf.field, value: fm.par[wf.where][wf.field] } );
   });
+  if (fm.par.Header.MsgType in perMsgFields) {
+		perMsgFields[fm.par.Header.MsgType].forEach( function(wf) {
+			fvArray.push( {field: wf.field, value: fm.par[wf.where][wf.field] } );
+		});
+	}
   return fvArray;
 };
 
@@ -35,7 +40,7 @@ $(function() {
   el: '#ShowFixApp',
   rawString: "",
   data: {
-    detailType: "", 
+    detailType: "par", // start with 'parsed' display
     rawString: "",
     fma: [],
 
@@ -49,7 +54,10 @@ $(function() {
     showDetail: function( fm ) {
       this.fieldList = getFieldValuesArray( fm );
       this.rawString = fm.raw;
-    }
+    },
+   detType: function(t) {
+			this.detailType = t;
+		}
   }
 })
 
@@ -58,7 +66,11 @@ const fix42test_2 = "8=FIX.4.29=15335=D49=BLP56=SCHB34=150=3073797=Y52=2
 
 var makeFM = function( fs ) {
   let ps = parse(fs);
-  let e = { sender: ps.Header.SenderCompID + '/', target: ps.Header.TargetCompID + '/', time: ps.Header.SendingTime};
+  let e = { 
+		time: ps.Header.SendingTime.substring(9),
+		sender: ps.Header.SenderCompID + '/' + ps.Header.SenderSubID, 
+		target: ps.Header.TargetCompID + '/' + ps.Header.TargetSubID 
+	};
   return { raw: fs, par: ps, ent: e }  ;    // raw string, parsed string, enhanced tags
 };
 app.addFM( makeFM(fix42test_1) );
